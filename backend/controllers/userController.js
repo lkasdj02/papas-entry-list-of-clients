@@ -1,5 +1,5 @@
 const fs = require("fs");
 
-function getUser(incomingdata) {
-  console.log(incomingdata.body);
-}
+async function findUser(incomingdata) {}
+
+async function createUser(req, res) {}

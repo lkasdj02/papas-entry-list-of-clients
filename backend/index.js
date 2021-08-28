@@ -1,6 +1,8 @@
 const http = require("http");
 const PORT = 3000;
 const server = http.createServer();
+const formBody = require("body/form");
+const jsonBody = require("body/json");
 
 server.on("request", (request, response) => {
   const { method, url } = request;
@@ -11,15 +13,13 @@ server.on("request", (request, response) => {
     response.write(JSON.stringify({ data: "hello world" }));
     response.end();
   } else if (method === "POST" && url === "/userin") {
-    let body = [];
-    request
-      .on("data", (chunk) => {
-        body.push(chunk);
-      })
-      .on("end", () => {
-        body = Buffer.concat(body).toString();
+    jsonBody(request, {}, (err, body) => {
+      try {
         console.log(JSON.stringify(body));
-      });
+      } catch (err) {
+        console.log(err);
+      }
+    });
     console.log(`${method} request was mad to ${url} url...`);
     response.statusCode = 200;
     response.setHeader("Content-Type", "application/json");
