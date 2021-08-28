@@ -10,6 +10,12 @@ server.on("request", (request, response) => {
     response.setHeader("Content-Type", "application/json");
     response.write(JSON.stringify({ data: "hello world" }));
     response.end();
+  } else if (method === "POST" && url === "/userin") {
+    console.log(`${method} request was mad to ${url} url...`);
+    console.log("user wants to enter");
+  } else if (method === "POST" && url === "/userin") {
+    console.log(`${method} request was mad to ${url} url...`);
+    console.log("user wants to get out");
   }
 });
 server.listen(PORT, () => {
