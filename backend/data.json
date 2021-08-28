@@ -1,8 +1,14 @@
 {
-  "entrate": [
+  "people": [
     {
       "name": "leonardo",
-      "orario": "08:25"
+      "surname": "basso",
+      "uuid": 122340987
+    },
+    {
+      "name": "anita",
+      "surname": "basso",
+      "uuid": 10986712345
     }
   ]
 }
