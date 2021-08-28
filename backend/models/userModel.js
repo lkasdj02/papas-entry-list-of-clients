@@ -1,5 +1,10 @@
+const { writeToFile } = require("../filemanager.js");
 const fs = require("fs");
-let data = require("data.json");
+const path = require("path");
+const DATAPATH = path.join("../", "backend/", "data.json");
+let data = require("../data.json"); // this might end up being a dynamic import
+console.log(data.persone);
+console.log(DATAPATH);
 
 function insertUser(name, surname, uuid) {
   return new Promise((resolve, reject) => {
@@ -8,7 +13,13 @@ function insertUser(name, surname, uuid) {
       surname: surname,
       uuid: uuid,
     };
-    data.people.push(user);
+    data.persone.push(user);
+    try {
+      writeToFile(DATAPATH, data);
+      resolve(1);
+    } catch (err) {
+      reject(err);
+    }
   });
 }
 

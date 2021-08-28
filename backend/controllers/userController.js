@@ -1,13 +1,19 @@
 const fs = require("fs");
-
-async function updateUser(incomingdata) {}
+const { insertUser } = require("../models/userModel.js");
+const { parseRequestToJson } = require("../filemanager.js");
 
 async function createUser(req, res) {
   try {
-    response.statusCode = 200;
-    response.setHeader("Content-Type", "application/json");
-    response.write(JSON.stringify({ data: "user created" }));
-    response.end();
+    let { name, surname, uuid } = await parseRequestToJson(req);
+    let userStatus = await insertUser(name, surname, uuid);
+    if (userStatus === 1) {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify({ data: "user created" }));
+      res.end();
+    } else {
+      throw "something went wrong";
+    }
   } catch (err) {
     console.error(err);
   }
@@ -15,4 +21,6 @@ async function createUser(req, res) {
 
 async function findUser(req, res) {}
 
-async function insertUser(req, res) {}
+module.exports = {
+  createUser,
+};

@@ -1,14 +1,1 @@
-{
-  "people": [
-    {
-      "name": "leonardo",
-      "surname": "basso",
-      "uuid": 122340987
-    },
-    {
-      "name": "anita",
-      "surname": "basso",
-      "uuid": 10986712345
-    }
-  ]
-}
+{"persone":[{"name":"edoardo","surname":"basso","uuid":10982952345},{"name":"anita","surname":"basso","uuid":10982952345}]}
