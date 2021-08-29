@@ -13,7 +13,7 @@ server.on("request", (request, response) => {
   } else if (method === "POST" && url === "/createuser") {
     insertUser(request, response);
   } else if (method === "POST" && url === "/entry") {
-    insertEntry(req, res);
+    insertEntry(request, response);
   }
 });
 

@@ -4,7 +4,7 @@ const { parseRequestToJson } = require("../filemanager.js");
 
 async function insertEntry(req, res) {
   try {
-    let { name, uuid, orario } = await req.parseRequestToJson(req);
+    let { name, uuid, orario } = await parseRequestToJson(req);
     let entryStatus = await createEntry(name, uuid, orario);
     if (entryStatus === 1) {
       res.statusCode = 200;

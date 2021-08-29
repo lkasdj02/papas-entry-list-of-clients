@@ -12,7 +12,7 @@ function createEntry(name, uuid, hour) {
       uuid: uuid,
       hour: hour,
     };
-    let a = users.find(
+    let a = users.persone.find(
       (person) => person.name === name && person.uuid === uuid
     );
     if (a) {
