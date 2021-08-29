@@ -1,3 +1,4 @@
-# this is the documentation file
+# Docs
 
-queste sono le avvertenze d'uso di questo programma in particolare.
+/GET/createuser 
+/GET/createentry
