@@ -12,7 +12,7 @@ function sendHtmlBack(pathToFile, response) {
       response.statusCode = 200;
       response.setHeader("Content-Type", "text/html");
       console.log("html page sent");
-      console.log;
+      response.write(data);
       response.end();
     });
   } catch (err) {
