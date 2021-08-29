@@ -13,17 +13,14 @@ function createEntry(name, uuid, hour) {
       hour: hour,
     };
     let a = users.persone.find(
-      (person) => person.name === name && person.uuid === uuid
+      (person) => person.name === entry.name && person.uuid === entry.uuid
     );
     if (a) {
-      try {
-        writeToFile(DATAPATH, data);
-        resolve(1);
-      } catch (err) {
-        reject(`some error occurred ${err}...`);
-      }
+      data.push(entry);
+      writeToFile(DATAPATH, data);
+      resolve(1);
     } else {
-      reject("user not found");
+      reject(2);
     }
   });
 }

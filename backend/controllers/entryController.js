@@ -6,16 +6,22 @@ async function insertEntry(req, res) {
   try {
     let { name, uuid, orario } = await parseRequestToJson(req);
     let entryStatus = await createEntry(name, uuid, orario);
-    if (entryStatus === 1) {
+    if (entryStatus !== 1) {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
       res.write(JSON.stringify({ data: "entry created" }));
       res.end();
-    } else {
-      throw "entry did not get inserted";
     }
   } catch (error) {
     console.log(`something went wrong: ${error}`);
+    if (error === 2) {
+      res.statusCode = 404;
+      res.setHeader("Content-Type", "application/json");
+      res.write(
+        JSON.stringify({ data: "entry was not created due to an error" })
+      );
+      res.end();
+    }
   }
 }
 
