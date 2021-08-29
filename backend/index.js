@@ -4,12 +4,12 @@ const PORT = process.env.PORT || 3000;
 const server = http.createServer();
 const { insertUser } = require("../backend/controllers/userController.js");
 const { insertEntry } = require("../backend/controllers/entryController.js");
-const { sendHtmlBack } = require("../backend/filemanager.js");
+const { sendFileBack } = require("../backend/filemanager.js");
 // create server
 server.on("request", (request, response) => {
   const { method, url } = request;
   if (method === "GET" && url === "/") {
-    sendHtmlBack("../res/index.html", response);
+    sendFileBack("../res/index.html", response);
   } else if (method === "POST" && url === "/createuser") {
     insertUser(request, response);
   } else if (method === "POST" && url === "/entry") {

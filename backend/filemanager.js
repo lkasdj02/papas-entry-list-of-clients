@@ -6,12 +6,11 @@ function writeToFile(pathToFile, data) {
     console.log(error);
   });
 }
-function sendHtmlBack(pathToFile, response) {
+function sendFileBack(pathToFile, response) {
   try {
     fs.readFile(pathToFile, (err, data) => {
       response.statusCode = 200;
       response.setHeader("Content-Type", "text/html");
-      console.log("html page sent");
       response.write(data);
       response.end();
     });
@@ -34,5 +33,5 @@ function parseRequestToJson(req) {
 module.exports = {
   writeToFile,
   parseRequestToJson,
-  sendHtmlBack,
+  sendFileBack,
 };
