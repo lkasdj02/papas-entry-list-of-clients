@@ -1,4 +1,4 @@
 # Docs
 
-> /GET/createuser
-> /GET/createentry
+/GET/createuser  
+/GET/createentry
