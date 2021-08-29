@@ -1,20 +1,23 @@
+// modules
 const http = require("http");
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const server = http.createServer();
-const { createUser } = require("../backend/controllers/userController");
+const { insertUser } = require("../backend/controllers/userController.js");
+const { insertEntry } = require("../backend/controllers/entryController.js");
 const { sendHtmlBack } = require("../backend/filemanager.js");
-
+// create server
 server.on("request", (request, response) => {
   const { method, url } = request;
   if (method === "GET" && url === "/") {
     sendHtmlBack("../res/index.html", response);
-  } else if (method === "POST" && url === "/userin") {
-    createUser(request, response);
-  } else if (method === "POST" && url === "/userin") {
-    console.log(`${method} request was mad to ${url} url...`);
-    console.log("user wants to get out");
+  } else if (method === "POST" && url === "/createuser") {
+    insertUser(request, response);
+  } else if (method === "POST" && url === "/entry") {
+    insertEntry(req, res);
   }
 });
+
+// open servers connection
 server.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`);
 });

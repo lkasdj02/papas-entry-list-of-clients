@@ -1,8 +1,8 @@
 const fs = require("fs");
-const { insertUser } = require("../models/userModel.js");
+const { createUser } = require("../models/userModel.js");
 const { parseRequestToJson } = require("../filemanager.js");
 
-async function createUser(req, res) {
+async function insertUser(req, res) {
   try {
     let { name, surname, uuid } = await parseRequestToJson(req);
     let userStatus = await insertUser(name, surname, uuid);
@@ -22,5 +22,5 @@ async function createUser(req, res) {
 async function findUser(req, res) {}
 
 module.exports = {
-  createUser,
+  insertUser,
 };
