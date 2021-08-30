@@ -21,8 +21,7 @@ server.on("request", (request, response) => {
     insertUser(request, response);
   } else if (method === "DELETE" && url.match(/\/deleteuser\/\d+/g)) {
     let id = url.match(/\d+/g);
-    let user = findUser(id);
-    console.log(user);
+    deleteUser(response, id);
   } else if (method === "POST" && url === "/createentry") {
     insertEntry(request, response);
   } else {

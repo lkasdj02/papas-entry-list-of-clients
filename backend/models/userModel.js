@@ -25,25 +25,29 @@ function deleteUserId(id) {
     setTimeout(() => {
       try {
         let users = data.persone.filter((user) => user.uuid !== id);
-        console.log(users);
+        writeToFile(DATAPATH, users);
+        resolve(1);
       } catch (err) {
         reject(2);
       }
     }, 2000);
   });
 }
-async function findId(id) {
+function findId(id) {
   return new Promise((resolve, reject) => {
-    try {
-      let user = data.persone.find((u) => u.uuid === parseInt(id));
-      console.log(user);
-      if (user !== undefined) {
-        resolve(user);
+    setTimeout(() => {
+      try {
+        let user = data.persone.find((u) => u.uuid === parseInt(id));
+        if (user !== undefined) {
+          resolve(user);
+        } else {
+          reject(new Error("resource not found"));
+        }
+      } catch (error) {
+        console.log(`something went wrong in the model ${error}`);
       }
-      reject(new Error("resource not found"));
-    } catch (error) {
-      console.log(`something went wrong in the model ${error}`);
-    }
+    }, 2000);
+    console.log("fetching user data...");
   });
 }
 
