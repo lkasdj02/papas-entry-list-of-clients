@@ -2,7 +2,7 @@
   "name": "newgitproj",
   "version": "1.0.0",
   "description": "this is the entry proj",
-  "main": "index.js",
+  "main": "../res/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

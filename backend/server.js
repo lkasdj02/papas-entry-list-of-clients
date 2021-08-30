@@ -2,9 +2,9 @@
 const http = require("http");
 const PORT = process.env.PORT || 3000;
 const server = http.createServer();
-const { insertUser } = require("../backend/controllers/userController.js");
-const { insertEntry } = require("../backend/controllers/entryController.js");
-const { sendFileBack } = require("../backend/filemanager.js");
+const { insertUser } = require("./controllers/userController.js");
+const { insertEntry } = require("./controllers/entryController.js");
+const { sendFileBack } = require("./filemanager.js");
 // create server
 server.on("request", (request, response) => {
   const { method, url } = request;
