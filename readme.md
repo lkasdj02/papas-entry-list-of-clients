@@ -1,3 +1,5 @@
-# this is the documentation file
+# Docs
 
-queste sono le avvertenze d'uso di questo programma in particolare.
+## List of endpoints  
+/GET/createuser  
+/GET/createentry
