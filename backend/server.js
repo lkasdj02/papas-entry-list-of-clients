@@ -2,7 +2,11 @@
 const http = require("http");
 const PORT = process.env.PORT || 3000;
 const server = http.createServer();
-const { insertUser, deleteUser } = require("./controllers/userController.js");
+const {
+  insertUser,
+  deleteUser,
+  findUser,
+} = require("./controllers/userController.js");
 const { insertEntry } = require("./controllers/entryController.js");
 const { sendFileBack } = require("./filemanager.js");
 // create server
@@ -10,13 +14,15 @@ server.on("request", (request, response) => {
   const { method, url } = request;
   if (method === "GET" && url === "/") {
     sendFileBack("../res/index.html", response);
+  } else if (method === "GET" && url.match(/\/finduser\/\d+/g)) {
+    let id = url.match(/\d+/g);
+    findUser(response, id[0]);
   } else if (method === "POST" && url === "/createuser") {
     insertUser(request, response);
   } else if (method === "DELETE" && url.match(/\/deleteuser\/\d+/g)) {
-    console.log("mathches the url: " + url);
     let id = url.match(/\d+/g);
-    console.log(id[0]);
-    deleteUser(request, response, id[0]);
+    let user = findUser(id);
+    console.log(user);
   } else if (method === "POST" && url === "/createentry") {
     insertEntry(request, response);
   } else {

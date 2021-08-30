@@ -32,8 +32,23 @@ function deleteUserId(id) {
     }, 2000);
   });
 }
+async function findId(id) {
+  return new Promise((resolve, reject) => {
+    try {
+      let user = data.persone.find((u) => u.uuid === parseInt(id));
+      console.log(user);
+      if (user !== undefined) {
+        resolve(user);
+      }
+      reject(new Error("resource not found"));
+    } catch (error) {
+      console.log(`something went wrong in the model ${error}`);
+    }
+  });
+}
 
 module.exports = {
   createUser,
   deleteUserId,
+  findId,
 };

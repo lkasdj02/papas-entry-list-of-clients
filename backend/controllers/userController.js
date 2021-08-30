@@ -1,5 +1,5 @@
 const fs = require("fs");
-const { createUser, deleteUserId } = require("../models/userModel.js");
+const { createUser, deleteUserId, findId } = require("../models/userModel.js");
 const { parseRequestToJson } = require("../filemanager.js");
 
 async function insertUser(req, res) {
@@ -19,10 +19,22 @@ async function insertUser(req, res) {
   }
 }
 
+async function findUser(res, id) {
+  try {
+    let user = await findId(id);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.write(JSON.stringify(user));
+    res.end();
+  } catch (err) {
+    console.log(`something went wrong in the controller : ${err}`);
+    res.writeHead(404, { "Content-Type": "application/json" });
+    res.write(JSON.stringify({ data: "resource not found" }));
+    res.end();
+  }
+}
+
 async function deleteUser(req, res, id) {
   try {
-    let userDeleteStatus = await deleteUserId(id);
-
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.write(
@@ -37,4 +49,5 @@ async function deleteUser(req, res, id) {
 module.exports = {
   insertUser,
   deleteUser,
+  findUser,
 };
