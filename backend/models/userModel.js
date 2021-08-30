@@ -20,7 +20,20 @@ function createUser(name, surname, uuid) {
     }
   });
 }
+function deleteUserId(id) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        let users = data.persone.filter((user) => user.uuid !== id);
+        console.log(users);
+      } catch (err) {
+        reject(2);
+      }
+    }, 2000);
+  });
+}
 
 module.exports = {
   createUser,
+  deleteUserId,
 };

@@ -21,9 +21,16 @@ async function insertUser(req, res) {
 
 async function deleteUser(req, res, id) {
   try {
-    // delete user
+    let userDeleteStatus = await deleteUserId(id);
+
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.write(
+      JSON.stringify({ data: `user with ${id} has been deleted succesfully` })
+    );
+    res.end();
   } catch (err) {
-    console.log(err);
+    console.log(`somethind went wrong ${err}`);
   }
 }
 
