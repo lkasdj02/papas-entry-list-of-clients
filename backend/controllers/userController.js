@@ -21,8 +21,7 @@ async function insertUser(req, res) {
 
 async function deleteUser(req, res, id) {
   try {
-    let { name, surname, uuid } = await parseRequestToJson(req);
-    let deleteUserStatus = await
+    // delete user
   } catch (err) {
     console.log(err);
   }

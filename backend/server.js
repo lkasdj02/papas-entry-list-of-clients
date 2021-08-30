@@ -12,7 +12,7 @@ server.on("request", (request, response) => {
     sendFileBack("../res/index.html", response);
   } else if (method === "POST" && url === "/createuser") {
     insertUser(request, response);
-  } else if (method === "POST" && url === "/deleteuser") {
+  } else if (method === "POST" && url.match("/deleteuser/[0-9]+")) {
     // delete user functionality
   } else if (method === "POST" && url === "/createentry") {
     insertEntry(request, response);
