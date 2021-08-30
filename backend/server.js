@@ -2,7 +2,7 @@
 const http = require("http");
 const PORT = process.env.PORT || 3000;
 const server = http.createServer();
-const { insertUser } = require("./controllers/userController.js");
+const { insertUser, deleteUser } = require("./controllers/userController.js");
 const { insertEntry } = require("./controllers/entryController.js");
 const { sendFileBack } = require("./filemanager.js");
 // create server
@@ -12,7 +12,9 @@ server.on("request", (request, response) => {
     sendFileBack("../res/index.html", response);
   } else if (method === "POST" && url === "/createuser") {
     insertUser(request, response);
-  } else if (method === "POST" && url === "/entry") {
+  } else if (method === "POST" && url === "/deleteuser") {
+    // delete user functionality
+  } else if (method === "POST" && url === "/createentry") {
     insertEntry(request, response);
   }
 });

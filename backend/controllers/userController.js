@@ -1,11 +1,11 @@
 const fs = require("fs");
-const { createUser } = require("../models/userModel.js");
+const { createUser, deleteUserId } = require("../models/userModel.js");
 const { parseRequestToJson } = require("../filemanager.js");
 
 async function insertUser(req, res) {
   try {
     let { name, surname, uuid } = await parseRequestToJson(req);
-    let userStatus = await insertUser(name, surname, uuid);
+    let userStatus = await createUser(name, surname, uuid);
     if (userStatus === 1) {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
@@ -19,8 +19,16 @@ async function insertUser(req, res) {
   }
 }
 
-async function findUser(req, res) {}
+async function deleteUser(req, res, id) {
+  try {
+    let { name, surname, uuid } = await parseRequestToJson(req);
+    let deleteUserStatus = await
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 module.exports = {
   insertUser,
+  deleteUser,
 };

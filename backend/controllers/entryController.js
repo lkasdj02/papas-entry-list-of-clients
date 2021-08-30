@@ -6,7 +6,8 @@ async function insertEntry(req, res) {
   try {
     let { name, uuid, orario } = await parseRequestToJson(req);
     let entryStatus = await createEntry(name, uuid, orario);
-    if (entryStatus !== 1) {
+    console.log(entryStatus);
+    if (entryStatus) {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
       res.write(JSON.stringify({ data: "entry created" }));

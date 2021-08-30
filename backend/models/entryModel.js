@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const DATAPATH = path.join("../", "backend/", "entries.json");
 let users = require("../data.json");
-let data = require("../entries.json"); // this might end up being a dynamic import
+let entries = require("../entries.json"); // this might end up being a dynamic import
 
 function createEntry(name, uuid, hour) {
   return new Promise((resolve, reject) => {
@@ -16,8 +16,8 @@ function createEntry(name, uuid, hour) {
       (person) => person.name === entry.name && person.uuid === entry.uuid
     );
     if (a) {
-      data.push(entry);
-      writeToFile(DATAPATH, data);
+      entries.entrate.push(entry);
+      writeToFile(DATAPATH, entries);
       resolve(1);
     } else {
       reject(2);
