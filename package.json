@@ -9,6 +9,7 @@
   "author": "leonardo basso",
   "license": "ISC",
   "dependencies": {
-    "body": "^5.1.0"
+    "body": "^5.1.0",
+    "mime-types": "^2.1.32"
   }
 }

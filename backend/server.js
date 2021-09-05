@@ -12,8 +12,13 @@ const { sendFileBack } = require("./filemanager.js");
 // create server
 server.on("request", (request, response) => {
   const { method, url } = request;
-  if (method === "GET" && url === "/") {
-    sendFileBack("../res/index.html", response);
+  if (
+    (method === "GET" && url === "/") ||
+    url.match(/\w+\.css/) ||
+    url.match(/\w+\.js/)
+  ) {
+    console.log(url);
+    sendFileBack(url, response);
   } else if (method === "GET" && url.match(/\/finduser\/\d+/g)) {
     let id = url.match(/\d+/g);
     findUser(response, id[0]);
@@ -26,9 +31,8 @@ server.on("request", (request, response) => {
   } else if (method === "POST" && url === "/createentry") {
     insertEntry(request, response);
   } else {
-    response.statusCode = 404;
-    response.writeHead("Content-type", "application/json");
-    response.write({ data: "resource not found" });
+    response.writeHead(404, { "Content-type": "application/json" });
+    response.write(JSON.stringify({ data: "resource not found" }));
     response.end();
   }
 });
