@@ -47,7 +47,7 @@ function findId(id) {
         console.log(`something went wrong in the model ${error}`);
       }
     }, 2000);
-    console.log("fetching user data...");
+    console.log("fetching user data..."); // this was just for debugging and also learning purposes.
   });
 }
 

@@ -6,6 +6,7 @@ async function findUser(res, id) {
   try {
     let user = await findId(id);
     console.log(user);
+    console.log("awaiting for the user from the controller");
     res.writeHead(200, { "Content-Type": "application/json" });
     res.write(JSON.stringify(user));
     res.end();

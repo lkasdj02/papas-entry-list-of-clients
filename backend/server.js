@@ -17,6 +17,7 @@ server.on("request", (request, response) => {
   } else if (method === "GET" && url.match(/\/finduser\/\d+/g)) {
     let id = url.match(/\d+/g);
     findUser(response, id[0]);
+    console.log("waiting for the user"); // this is also for learning purposes
   } else if (method === "POST" && url === "/createuser") {
     insertUser(request, response);
   } else if (method === "DELETE" && url.match(/\/deleteuser\/\d+/g)) {
