@@ -13,7 +13,7 @@ async function findUser(res, id) {
   } catch (err) {
     console.log(`something went wrong in the controller : ${err}`);
     res.writeHead(404, { "Content-Type": "application/json" });
-    res.write(JSON.stringify({ data: `${err}` }));
+    res.write(JSON.stringify({ error: `${err}` }));
     res.end();
   }
 }

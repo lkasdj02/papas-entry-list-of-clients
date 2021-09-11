@@ -2,7 +2,8 @@
 const txtUserUuid = document.getElementById("insertuser-uuid");
 const sendUserData = document.getElementById("getUserById");
 const containerDiv = document.getElementById("container");
-// EVENT handlers
+const resultNode = document.getElementById("result");
+
 sendUserData.addEventListener("click", () => {
   console.log("user clicked the button");
   try {
@@ -10,17 +11,24 @@ sendUserData.addEventListener("click", () => {
     console.log(userId);
     fetch(`http://localhost:3000/finduser/${userId}`)
       .then((res) => {
-        let p2 = res.json();
-        return p2;
+        if (res.ok) {
+          console.log("RESPONSE WAS OK");
+          let p2 = res.json(); // return res.json() would simply do the same thing snce it returns a promise.
+          return p2;
+        } else if (res.status === 404) {
+          throw { error: "resource not found" };
+        }
       })
       .then((item) => {
-        let node = document.createElement("h1"); // Create a <li> node
         let textnode = document.createTextNode(item.name); // Create a text node
-        node.appendChild(textnode);
-        containerDiv.appendChild(node);
+        resultNode.appendChild(textnode);
         console.log(item);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        let textnode = document.createTextNode(err.error); // Create a text node
+        resultNode.appendChild(textnode);
+        console.log(err);
+      });
   } catch (error) {
     console.log(`something went wrong ${error}`);
   }

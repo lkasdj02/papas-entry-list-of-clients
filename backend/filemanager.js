@@ -19,16 +19,16 @@ function sendFileBack(url, res) {
     if (path === "") {
       path = "index.html";
     }
-    console.log(`Requested path ${path}`);
+    // console.log(`Requested path ${path}`);
     let file = "../res/" + path;
     fs.readFile(file, function (err, content) {
-      console.log("reading the file");
+      // console.log("reading the file");
       if (err) {
         console.log(`File Not Found ${file}`);
         res.writeHead(404);
         res.end();
       } else {
-        console.log(`Returning ${file}`);
+        // console.log(`Returning ${file}`);
         res.setHeader("X-Content-Type-Options", "nosniff");
         let mime = lookup(path);
         res.writeHead(200, { "Content-type": mime });
