@@ -8,7 +8,7 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="finduser" id="container">
+    <div class="find-user" id="findcontainer">
       <input
         type="text"
         name=""
@@ -16,8 +16,26 @@
         id="insertuser-uuid"
         placeholder="uuid"
       /><br />
-      <button id="getUserById">GET USER</button>
-      <h1 id="result"></h1>
+      <button id="find-user-button">GET USER</button>
+      <h1 id="result-find">result:</h1>
+    </div>
+    <div class="create-user" id="createcontainer">
+      <input
+        type="text"
+        name=""
+        value=""
+        id="insertuser-name"
+        placeholder="user name"
+      /><br />
+      <input
+        type="text"
+        name=""
+        value=""
+        id="insertuser-surname"
+        placeholder="user surname"
+      /><br />
+      <button id="create-user-button">CREATE USER</button>
+      <h1 id="result-create">result:</h1>
     </div>
     <script src="main.js"></script>
   </body>

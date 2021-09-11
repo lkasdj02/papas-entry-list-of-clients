@@ -1,10 +1,13 @@
 // HTML elements
-const txtUserUuid = document.getElementById("insertuser-uuid");
-const sendUserData = document.getElementById("getUserById");
-const containerDiv = document.getElementById("container");
-const resultNode = document.getElementById("result");
+const txtUserSurname = document.getElementById("insertuser-surname");
+const txtUserName = document.getElementById("insertuser-name");
+const findUserBUTTON = document.getElementById("find-user-button");
+const createUserBUTTON = document.getElementById("create-user-button");
+const findResultNode = document.getElementById("result-find");
+const createResultNode = document.getElementById("result-find");
 
-sendUserData.addEventListener("click", () => {
+// EVENT LISTENERS
+findUserBUTTON.addEventListener("click", () => {
   console.log("user clicked the button");
   try {
     let userId = txtUserUuid.value === null ? "000" : txtUserUuid.value;
@@ -20,18 +23,45 @@ sendUserData.addEventListener("click", () => {
         }
       })
       .then((item) => {
-        let textnode = document.createTextNode(item.name); // Create a text node
-        resultNode.appendChild(textnode);
+        // let textnode = document.createTextNode(item.name); // Create a text node
         console.log(item);
+        findResultNode.innerText = `result: ${item.name}`;
+        txtUserUuid.value = "";
       })
       .catch((err) => {
-        let textnode = document.createTextNode(err.error); // Create a text node
-        resultNode.appendChild(textnode);
         console.log(err);
+        findResultNode.innerText = `result: ${err.error}`;
       });
   } catch (error) {
     console.log(`something went wrong ${error}`);
   }
 });
-
+createUserBUTTON.addEventListener("click", () => {
+  // do post stuff
+  let user = {
+    name: txtUserName.value,
+    surname: txtUserSurname.value,
+    uuid: generateRandomNumber(),
+  };
+  fetch("http://localhost:3000/createuser")
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        throw new Error(`something went wrong with the response ${res.status}`);
+      }
+    })
+    .then((body) => {
+      console.log(body);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 // functions
+
+const generateRandomNumber = function () {
+  let number = Math.round(new Number(Math.random() * 10000));
+
+  return number;
+};
