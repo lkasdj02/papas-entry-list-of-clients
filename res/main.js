@@ -36,6 +36,7 @@ findUserBUTTON.addEventListener("click", () => {
     console.log(`something went wrong ${error}`);
   }
 });
+
 createUserBUTTON.addEventListener("click", () => {
   // do post stuff
   let user = {
@@ -43,7 +44,13 @@ createUserBUTTON.addEventListener("click", () => {
     surname: txtUserSurname.value,
     uuid: generateRandomNumber(),
   };
-  fetch("http://localhost:3000/createuser")
+  let req = buildRequest(
+    "http://localhost:3000/createuser",
+    JSON.stringify(user),
+    "POST",
+    new Headers({ "Content-type": "application/json" })
+  );
+  fetch(req)
     .then((res) => {
       if (res.ok) {
         return res.json();
@@ -64,4 +71,9 @@ const generateRandomNumber = function () {
   let number = Math.round(new Number(Math.random() * 10000));
 
   return number;
+};
+
+const buildRequest = function (url, body, method, headers) {
+  let request = new Request(url, { headers, method, body });
+  return request;
 };
